@@ -1,0 +1,64 @@
+{% extends 'generic/object.html' %}
+{% load helpers %}
+
+{% block title %}Sync Log: {{ object }}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col col-md-6">
+    <div class="card">
+      <h5 class="card-header">Sync Details</h5>
+      <div class="card-body">
+        <table class="table table-hover attr-table">
+          <tr><th scope="row">Network ID</th><td><code>{{ object.network_id }}</code></td></tr>
+          <tr><th scope="row">Network Name</th><td>{{ object.network_name|default:"—" }}</td></tr>
+          <tr><th scope="row">NetBox Site</th><td>{{ object.site_name|default:"—" }}</td></tr>
+          <tr><th scope="row">Status</th>
+            <td><span class="badge bg-{{ object.get_status_color }}">{{ object.get_status_display }}</span></td>
+          </tr>
+          <tr><th scope="row">Started</th><td>{{ object.started_at }}</td></tr>
+          <tr><th scope="row">Completed</th><td>{{ object.completed_at|default:"—" }}</td></tr>
+          <tr><th scope="row">Duration</th>
+            <td>{% if object.duration %}{{ object.duration }}{% else %}—{% endif %}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    {% if object.message %}
+    <div class="card mt-3">
+      <h5 class="card-header">Message</h5>
+      <div class="card-body"><pre class="mb-0 text-danger">{{ object.message }}</pre></div>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="col col-md-6">
+    <div class="card">
+      <h5 class="card-header">Sync Counters</h5>
+      <div class="card-body">
+        <table class="table table-hover attr-table">
+          <tr><th scope="row">Devices seen</th><td>{{ object.devices_seen }}</td></tr>
+          <tr><th scope="row">Devices created</th>
+            <td>
+              {% if object.devices_created %}
+                <span class="badge bg-success">{{ object.devices_created }}</span>
+              {% else %}0{% endif %}
+            </td>
+          </tr>
+          <tr><th scope="row">Devices updated</th>
+            <td>
+              {% if object.devices_updated %}
+                <span class="badge bg-warning text-dark">{{ object.devices_updated }}</span>
+              {% else %}0{% endif %}
+            </td>
+          </tr>
+          <tr><th scope="row">Interfaces synced</th><td>{{ object.interfaces_synced }}</td></tr>
+          <tr><th scope="row">MAC addresses synced</th><td>{{ object.macs_synced }}</td></tr>
+          <tr><th scope="row">IP addresses synced</th><td>{{ object.ips_synced }}</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

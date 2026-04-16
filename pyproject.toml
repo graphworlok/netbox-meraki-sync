@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "netbox-meraki-sync"
+version = "0.1.0"
+description = "NetBox plugin to synchronise Cisco Meraki networks into NetBox"
+requires-python = ">=3.10"
+dependencies = [
+    "meraki>=1.48.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-django"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["netbox_meraki_sync*"]

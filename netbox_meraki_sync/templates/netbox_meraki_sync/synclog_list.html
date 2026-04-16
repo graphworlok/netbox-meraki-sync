@@ -1,0 +1,10 @@
+{% extends 'generic/object_list.html' %}
+{% load helpers %}
+
+{% block title %}Meraki Sync Logs{% endblock %}
+
+{% block extra_controls %}
+<a href="#" class="btn btn-sm btn-outline-secondary" title="Run sync via: python manage.py sync_meraki">
+  <i class="mdi mdi-information-outline"></i> Run via CLI
+</a>
+{% endblock %}
