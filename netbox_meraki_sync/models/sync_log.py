@@ -2,9 +2,12 @@ from django.db import models
 from django.urls import reverse
 
 from ..choices import SyncStatusChoices
+from .querysets import PluginQuerySet
 
 
 class SyncLog(models.Model):
+    objects = PluginQuerySet.as_manager()
+
     """
     Audit record for a single Meraki → NetBox sync run against one network.
     Plain Django model (not NetBoxModel) — sync logs are write-once records,
